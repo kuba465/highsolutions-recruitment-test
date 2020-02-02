@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Swapi;
 
 use App\Http\Controllers\Controller;
+use App\Http\Models\Person;
 use App\Http\Services\Swapi\PeopleService;
+use Illuminate\Support\Facades\DB;
 
 class PeopleController extends Controller
 {
@@ -24,7 +26,8 @@ class PeopleController extends Controller
     public function getPeopleAction()
     {
         $people = $this->peopleService->fetchPeople();
-        dd($people);
+
+        DB::table('swapi_people')->insert($people);
     }
 
     public function getPersonAction(string $name)
