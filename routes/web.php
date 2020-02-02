@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['namespace' => 'Swapi', 'name' => 'swapi.'], function () {
+    Route::get('get-people', 'PeopleController@getPeopleAction')
+        ->name('get_people');
+
+    Route::get('get-person/{name}', 'PeopleController@getPersonAction')
+        ->name('get_person')
+        ->where('name', '[A-Za-z]+');
+});
