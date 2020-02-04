@@ -21,5 +21,5 @@ Route::group(['namespace' => 'Swapi', 'name' => 'swapi.'], function () {
 
     Route::get('get-person/{name?}', 'PeopleController@getPersonAction')
         ->name('get_person')
-        ->middleware('check-name');
+        ->middleware(['verify-token', 'check-name']);
 });
