@@ -19,7 +19,7 @@ Route::group(['namespace' => 'Swapi', 'name' => 'swapi.'], function () {
     Route::get('fetch-people', 'PeopleController@fetchPeopleAction')
         ->name('fetch_people');
 
-    Route::get('get-person/{name}', 'PeopleController@getPersonAction')
+    Route::get('get-person/{name?}', 'PeopleController@getPersonAction')
         ->name('get_person')
-        ->where('name', '[A-Za-z0-9-_]+');
+        ->middleware('check-name');
 });
