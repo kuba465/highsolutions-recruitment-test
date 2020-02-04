@@ -16,8 +16,8 @@ Route::get('/', function () {
 });
 
 Route::group(['namespace' => 'Swapi', 'name' => 'swapi.'], function () {
-    Route::get('get-people', 'PeopleController@getPeopleAction')
-        ->name('get_people');
+    Route::get('fetch-people', 'PeopleController@fetchPeopleAction')
+        ->name('fetch_people');
 
     Route::get('get-person/{name}', 'PeopleController@getPersonAction')
         ->name('get_person')
