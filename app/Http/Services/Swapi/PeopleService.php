@@ -4,10 +4,17 @@ namespace App\Http\Services\Swapi;
 
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
 
 class PeopleService
 {
     const URI = 'https://swapi.co/api/people/';
+
+    public function savePeople(): void
+    {
+        $people = $this->fetchPeople();
+        DB::table('swapi_people')->insert($people);
+    }
 
     /**
      * @return array

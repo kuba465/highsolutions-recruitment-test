@@ -21,5 +21,5 @@ Route::group(['namespace' => 'Swapi', 'name' => 'swapi.'], function () {
 
     Route::get('get-person/{name}', 'PeopleController@getPersonAction')
         ->name('get_person')
-        ->where('name', '[A-Za-z]+');
+        ->where('name', '[A-Za-z0-9-_]+');
 });

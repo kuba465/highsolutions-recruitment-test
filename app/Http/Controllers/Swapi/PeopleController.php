@@ -31,14 +31,30 @@ class PeopleController extends Controller
     {
         DB::table('swapi_people')->delete();
 
-        $people = $this->peopleService->fetchPeople();
-        DB::table('swapi_people')->insert($people);
+        $this->peopleService->savePeople();
 
         return response(__('swapi.people_saved'), 200);
     }
 
+    /**
+     * @param string $name
+     * @return Response
+     */
     public function getPersonAction(string $name)
     {
+        if (!DB::table('swapi_people')->exists()) {
+            $this->peopleService->savePeople();
+        }
 
+        $name = str_replace('_', ' ', $name);
+        $person = Person::query()
+            ->where('name', 'like', '%' . $name . '%')
+            ->first();
+
+        if (is_null($person)) {
+            return response(__('swapi.not_found'), 404);
+        }
+
+        return response($person, 200);
     }
 }
