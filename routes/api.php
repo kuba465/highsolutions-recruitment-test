@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +12,23 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+    'namespace' => 'Swapi',
+    'name' => 'swapi.',
+    'middleware' => ['verify-token']
+], function () {
+    Route::get('fetch-people', 'PeopleController@fetchPeopleAction')
+        ->name('fetch_people');
+
+    Route::group([
+        'middleware' => 'not-empty-swapi-table',
+        'prefix' => 'get-people'
+    ], function () {
+        Route::get('/', 'PeopleController@getPeopleAction')
+            ->name('get_people');
+
+        Route::get('/{name}', 'PeopleController@getPersonAction')
+            ->name('get_person')
+            ->middleware(['check-name']);
+    });
 });
