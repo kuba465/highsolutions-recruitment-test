@@ -228,4 +228,5 @@ return [
 
     ],
 
+    'api_token' => '1zi2bM2LrqNhvua43Ewnk6rBFqAheUqGf6sforZX'
 ];

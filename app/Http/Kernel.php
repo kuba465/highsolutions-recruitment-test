@@ -2,6 +2,9 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckName;
+use App\Http\Middleware\NotEmptySwapiTable;
+use App\Http\Middleware\VerifyToken;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -61,6 +64,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'check-name' => CheckName::class,
+        'verify-token' => VerifyToken::class,
+        'not-empty-swapi-table' => NotEmptySwapiTable::class
     ];
 
     /**
