@@ -37,15 +37,21 @@ class PeopleController extends Controller
     }
 
     /**
+     * @return Response
+     */
+    public function getPeopleAction(): Response
+    {
+        $people = Person::all();
+
+        return response($people, 200);
+    }
+
+    /**
      * @param string $name
      * @return Response
      */
     public function getPersonAction(string $name)
     {
-        if (!DB::table('swapi_people')->exists()) {
-            $this->peopleService->savePeople();
-        }
-
         $name = str_replace('_', ' ', $name);
         $person = Person::query()
             ->where('name', 'like', '%' . $name . '%')
