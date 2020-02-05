@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Swapi;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Person;
 use App\Http\Services\Swapi\PeopleService;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
@@ -31,7 +32,11 @@ class PeopleController extends Controller
     {
         DB::table('swapi_people')->delete();
 
-        $this->peopleService->savePeople();
+        try {
+            $this->peopleService->savePeople();
+        } catch (RequestException $exception) {
+            return response(__('swapi.swapi_api_error'), 503);
+        }
 
         return response(__('swapi.people_saved'), 200);
     }

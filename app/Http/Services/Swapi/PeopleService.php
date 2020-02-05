@@ -19,7 +19,7 @@ class PeopleService
     /**
      * @return array
      */
-    public function fetchPeople(): array
+    private function fetchPeople(): array
     {
         $people = [];
         $client = new Client();
