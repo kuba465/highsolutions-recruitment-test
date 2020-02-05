@@ -16,7 +16,7 @@ class CheckName
     public function handle($request, Closure $next)
     {
         if (!preg_match('/[A-Za-z0-9-_]+/', $request->name)) {
-            return response(__('swapi.wrong_name'), 404);
+            return response(__('swapi.wrong_name'), 400);
         }
 
         return $next($request);
