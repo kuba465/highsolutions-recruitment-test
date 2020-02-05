@@ -24,10 +24,10 @@ class CreateSwapiPeopleTable extends Migration
             $table->string('birth_year');
             $table->string('gender');
             $table->string('homeworld');
-            $table->json('films');
-            $table->json('species');
-            $table->json('vehicles');
-            $table->json('starships');
+            $table->text('films');
+            $table->text('species');
+            $table->text('vehicles');
+            $table->text('starships');
             $table->dateTime('created');
             $table->dateTime('edited');
             $table->string('url');
