@@ -10,16 +10,23 @@ class CheckNameMiddlewareTest extends TestCase
 {
     use RefreshDatabase;
 
+    public $token;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->token = config('app.api_token');
+    }
+
     /**
      * @test
      */
     public function should_return_wrong_name_response_when_wrong_name_provided()
     {
         factory(Person::class, 3)->create();
-        $token = config('app.api_token');
         $response = $this->get(route('get_person', [
             'name' => '$',
-            'token' => $token
+            'token' => $this->token
         ]));
 
         $this->assertEquals(400, $response->getStatusCode());
@@ -32,10 +39,9 @@ class CheckNameMiddlewareTest extends TestCase
     {
         factory(Person::class, 3)->create();
         $person = Person::first();
-        $token = config('app.api_token');
         $response = $this->get(route('get_person', [
             'name' => $person->name,
-            'token' => $token
+            'token' => $this->token
         ]));
 
         $this->assertEquals(200, $response->getStatusCode());

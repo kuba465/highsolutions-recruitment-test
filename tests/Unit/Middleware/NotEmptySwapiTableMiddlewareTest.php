@@ -10,14 +10,21 @@ class NotEmptySwapiTableMiddlewareTest extends TestCase
 {
     use RefreshDatabase;
 
+    public $token;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->token = config('app.api_token');
+    }
+
     /**
      * @test
      */
     public function should_return_empty_table_response_when_no_people_in_table()
     {
-        $token = config('app.api_token');
         $response = $this->get(route('get_people', [
-            'token' => $token
+            'token' => $this->token
         ]));
 
         $this->assertEquals(__('swapi.empty_table'), $response->getContent());
@@ -30,9 +37,8 @@ class NotEmptySwapiTableMiddlewareTest extends TestCase
     {
         factory(Person::class, 3)->create();
 
-        $token = config('app.api_token');
         $response = $this->get(route('get_people', [
-            'token' => $token
+            'token' => $this->token
         ]));
 
         $this->assertEquals(200, $response->getStatusCode());
