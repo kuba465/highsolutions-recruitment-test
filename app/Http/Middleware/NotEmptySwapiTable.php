@@ -16,8 +16,7 @@ class NotEmptySwapiTable
      */
     public function handle($request, Closure $next)
     {
-        $isEmpty = Person::all()->count() === 0;
-        if ($isEmpty) {
+        if (!Person::all()->count()) {
             return response(__('swapi.empty_table'), 200);
         }
 
