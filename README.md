@@ -1,6 +1,6 @@
 About application
 
-Application connects with swapi API and save people to database. User can get all people or just one person from database. Application is running on: https://swapi-people.herokuapp.com/. 
+Application (API) connects with swapi API and save people to database. User can get all people or just one person from database. Application is running on: https://swapi-people.herokuapp.com/. 
 
 List of actions:
 - /api/fetch-people - connect to swapi  API and save people to database
