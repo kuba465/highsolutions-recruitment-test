@@ -1,4 +1,4 @@
-##About application
+About application
 
 Application connects with swapi API and save people to database. User can get all people or just one person from database. Application is running on: https://swapi-people.herokuapp.com/. 
 
